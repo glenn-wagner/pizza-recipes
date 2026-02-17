@@ -154,12 +154,12 @@
 var recipes = [
   {
     section: "doughs",
-    title: "Sisofo 3h Pizza Dough",
+    title: "3h Pizza Dough",
     description: "A same-day pizza dough ready in about 3 hours. Minimal yeast, a couple of folds, and a relaxed proof.",
     category: "Pizza Dough",
     time: "~3 hours",
     serves: "~3 balls (290g each)",
-    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
+    image: "images/3hours.jpeg",
     ingredients: [
       { amount: "500g", name: "double zero (00) flour" },
       { amount: "375g", name: "water" },
@@ -189,12 +189,12 @@ var recipes = [
   },
   {
     section: "doughs",
-    title: "Iacopelli Double Fermentation 3-Day Dough",
+    title: "Double Fermentation 3-Day Dough",
     description: "A poolish-based dough fermented over three days for deep flavour and an open, airy crumb.",
     category: "Pizza Dough",
     time: "3 days",
     serves: "Several balls",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
+    image: "images/double_ferment.jpeg",
     ingredients: [
       { amount: "150ml", name: "water (for poolish)" },
       { amount: "150g",  name: "flour (for poolish)" },
@@ -226,12 +226,12 @@ var recipes = [
   },
   {
     section: "doughs",
-    title: "Sisifo Leopard Pizza Dough",
+    title: "Leopard Pizza Dough",
     description: "A biga-and-poolish combo with a multi-day cold ferment designed for maximum flavour and leopard spotting in the oven.",
     category: "Pizza Dough",
     time: "4 days",
     serves: "Several balls (270g each)",
-    image: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=800&q=80",
+    image: null,
     ingredients: [
       { amount: "292g",    name: "flour (for biga)" },
       { amount: "146g",    name: "water (for biga)" },
@@ -266,12 +266,12 @@ var recipes = [
   },
   {
     section: "doughs",
-    title: "Oliver and Mat Manitoba Pizza",
+    title: "Manitoba Pizza Dough",
     description: "A 63-hour cold-fermented dough made with high-protein Manitoba flour. Stretches beautifully to a 10-inch base.",
     category: "Pizza Dough",
     time: "~3 days",
     serves: "Several balls (230g each)",
-    image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=800&q=80",
+    image: null,
     ingredients: [
       { amount: "1kg",       name: "Caputo Manitoba flour, plus extra for kneading" },
       { amount: "700g",      name: "water" },
@@ -298,6 +298,49 @@ var recipes = [
       ]}
     ],
     notes: null
+  },
+  {
+    section: "beyond",
+    title: "No-Yeast Naan",
+    description: "A soft, slightly chewy flatbread leavened with yogurt and baking powder. Ready in under 3 hours with no yeast required — cooked on a hot skillet or directly on the flame.",
+    category: "Flatbread",
+    time: "~3 hours",
+    serves: "~8–9 naans",
+    image: "images/naan.jpeg",
+    ingredients: [
+      { amount: "¼ cup",   name: "plain yogurt (or cashew/almond yogurt)" },
+      { amount: "1 tsp",   name: "sugar" },
+      { amount: "1 tsp",   name: "baking powder" },
+      { amount: "1 pinch", name: "baking soda" },
+      { amount: "2 cups",  name: "all-purpose flour" },
+      { amount: "1 tsp",   name: "salt" },
+      { amount: "2 tbsp",  name: "neutral oil (or butter)" },
+      { amount: "½ cup",   name: "water" },
+      { amount: "1 tbsp",  name: "nigella seeds (kalonji), sesame seeds, or melon seeds — optional" },
+      { amount: "as needed", name: "butter or ghee, for brushing after cooking" }
+    ],
+    phases: [
+      { heading: "Make the Dough", steps: [
+        "In a mixing bowl, combine the yogurt, sugar, baking powder, and baking soda. Stir well until the sugar dissolves.",
+        "Add the flour and salt, and mix with a spoon to distribute evenly.",
+        "Make a well in the centre, add the oil, then pour in ½ cup of water.",
+        "Mix, then knead to a smooth, soft, and pliable dough. If it feels dry, add a splash more water; if sticky, dust with a little flour.",
+        "Lightly oil the surface of the dough, place it back in the bowl, and cover with a damp cloth and lid. Rest for 2 hours."
+      ]},
+      { heading: "Shape the Naans", steps: [
+        "Divide the dough into 8–9 medium balls.",
+        "Lightly flour your surface and rolling pin. Flatten a ball slightly, sprinkle with seeds if using, and roll into a 6–7 inch elongated oval.",
+        "Taper one end by rolling it slightly thinner — this gives the classic tear-drop shape."
+      ]},
+      { heading: "Cook on the Stovetop", steps: [
+        "Heat a heavy skillet or tawa over medium-high to high heat. Place the naan on the hot surface.",
+        "Cook until air pockets begin to appear on the surface, then flip with tongs.",
+        "Cook the second side more than the first — until more air pockets form and it develops some colour.",
+        "For charred spots, hold the naan directly over a gas flame with tongs, rotating it and toasting the edges. Don't over-char or it will turn crispy.",
+        "Place on a plate and brush immediately with butter or ghee. Serve hot."
+      ]}
+    ],
+    notes: "Best eaten hot. If you don't have a gas flame, cook entirely on the skillet — press the edges with a spatula to make sure they cook through. The dough keeps in the fridge for 3–4 days. Using more yogurt in place of some or all of the water may give a better result — a richer dough with more flavour and a softer texture."
   }
 ];
 
@@ -311,8 +354,15 @@ var closeBtn = document.getElementById('closeBtn');
 
 function openModal(i) {
   var r = recipes[i];
-  document.getElementById('modalImg').src = r.image;
-  document.getElementById('modalImg').alt = r.title;
+  var modalImg = document.getElementById('modalImg');
+  if (r.image) {
+    modalImg.src = r.image;
+    modalImg.alt = r.title;
+    modalImg.style.display = '';
+  } else {
+    modalImg.src = '';
+    modalImg.style.display = 'none';
+  }
   document.getElementById('modalTitle').textContent = r.title;
   document.getElementById('modalDesc').textContent = r.description;
   document.getElementById('modalMeta').innerHTML =
@@ -359,7 +409,7 @@ for (var k = 0; k < recipes.length; k++) {
     card.tabIndex = 0;
     card.setAttribute('role', 'button');
     card.innerHTML =
-      '<div class="card-img-wrap"><img src="' + r.image + '" alt="' + r.title + '" loading="lazy"></div>' +
+      (r.image ? '<div class="card-img-wrap"><img src="' + r.image + '" alt="' + r.title + '" loading="lazy"></div>' : '') +
       '<div class="card-body">' +
         '<div class="card-meta"><span>' + r.category + '</span><span>' + r.time + '</span><span>' + r.serves + '</span></div>' +
         '<h2 class="card-title">' + r.title + '</h2>' +
