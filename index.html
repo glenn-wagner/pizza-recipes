@@ -158,7 +158,7 @@ var recipes = [{
     category: "Flatbread",
     time: "~30 mins",
     serves: "4 flatbreads",
-    image: null,
+    image: "images/lachmacun.jpeg",
     ingredients: [
       { amount: "1 portion", name: "pizza dough (use any dough from this site)" },
       { amount: "½",         name: "sweet red pepper, roughly chopped" },
@@ -200,7 +200,7 @@ var recipes = [{
     category: "Flatbread",
     time: "~50 mins",
     serves: "6 servings",
-    image: null,
+    image: "images/flammkuchen.jpeg",
     ingredients: [
       { amount: "250g (2 cups)", name: "all-purpose flour" },
       { amount: "120g (½ cup)", name: "very warm water" },
@@ -238,7 +238,7 @@ var recipes = [{
     category: "Pizza Dough",
     time: "2 days",
     serves: "2 balls (300g each, 12\" pizza)",
-    image: null,
+    image: "images/gluten_free.jpeg",
     ingredients: [
       { amount: "320g",      name: "Caputo Fioreglut gluten-free flour" },
       { amount: "2g",        name: "instant yeast" },
@@ -308,7 +308,7 @@ var recipes = [{
   },{
     section: "beyond",
     title: "Pita Pockets",
-    description: "A wet, yeast-leavened dough baked at maximum heat — the steam trapped inside creates the pocket. Works in a home oven with a pizza stone or straight in the Ooni.",
+    description: "A wet, yeast-leavened dough baked at maximum heat — the steam trapped inside creates the pocket. Works in a home oven with a pizza stone or straight in a pizza oven.",
     category: "Flatbread",
     time: "~4 hours",
     serves: "8 pitas",
@@ -339,8 +339,8 @@ var recipes = [{
         "Flip and cook the other side for another few minutes until lightly browned.",
         "Transfer to a bowl and cover with a clean towel to keep soft. Repeat with the remaining pita."
       ]},
-      { heading: "Bake — Ooni", steps: [
-        "Preheat the Ooni to maximum for 15–20 minutes, then turn down to low.",
+      { heading: "Bake — pizza oven", steps: [
+        "Preheat the pizza oven to maximum for 15–20 minutes, then turn down to low.",
         "Launch one or two pita towards the outer edge of the stone — they puff almost immediately.",
         "Turn nearly continuously for even browning, then peel out, flip, and relaunch. Cook the second side 1–2 minutes more.",
         "Rest in a covered bowl. Serve warm or at room temperature."
@@ -350,47 +350,12 @@ var recipes = [{
   },
   {
     section: "doughs",
-    title: "3h Pizza Dough",
-    description: "A same-day pizza dough ready in about 3 hours. Minimal yeast, a couple of folds, and a relaxed proof.",
-    category: "Pizza Dough",
-    time: "~3 hours",
-    serves: "~3 balls (290g each)",
-    image: "3hours.jpeg",
-    ingredients: [
-      { amount: "500g", name: "double zero (00) flour" },
-      { amount: "375g", name: "water" },
-      { amount: "12g",  name: "salt" },
-      { amount: "2g",   name: "yeast" }
-    ],
-    phases: [
-      { heading: "Mix Ingredients", steps: [
-        "Add 2g of yeast to a mixing bowl.",
-        "Pour in 375g of water and stir until the yeast fully dissolves.",
-        "Add 500g of 00 flour and 12g of salt. Mix with a spoon, then use your hands to bring it together into a shaggy dough."
-      ]},
-      { heading: "Rest the Dough", steps: [
-        "Place the dough in a container. Let it rest at room temperature for 30 minutes."
-      ]},
-      { heading: "Stretch and Fold", steps: [
-        "After 30 minutes, stretch and fold the dough on all four sides, then shape it into a tighter ball. Let it rest for 1 hour at room temperature."
-      ]},
-      { heading: "Divide and Shape", steps: [
-        "Divide the dough into portions of 290g each. Slap each piece on the counter a few times, then shape into a smooth, tight dough ball."
-      ]},
-      { heading: "Final Proof", steps: [
-        "Let the dough balls rest at room temperature for 1.5 hours until roughly doubled in size. Now ready to stretch and top."
-      ]}
-    ],
-    notes: "Slap the dough balls on the counter a few times when forming them. Best to extend the total time to 4-4.5 hours and do some reballing for better structure."
-  },
-  {
-    section: "doughs",
     title: "Double Fermentation 3-Day Dough",
     description: "A poolish-based dough fermented over three days for deep flavour and an open, airy crumb.",
     category: "Pizza Dough",
     time: "3 days",
     serves: "Several balls",
-    image: "double_ferment.jpeg",
+    image: "images/double_ferment.jpeg",
     ingredients: [
       { amount: "150ml", name: "water (for poolish)" },
       { amount: "150g",  name: "flour (for poolish)" },
@@ -427,7 +392,7 @@ var recipes = [{
     category: "Pizza Dough",
     time: "4 days",
     serves: "Several balls (270g each)",
-    image: null,
+    image: "images/leoparding.jpeg",
     ingredients: [
       { amount: "292g",    name: "flour (for biga)" },
       { amount: "146g",    name: "water (for biga)" },
@@ -467,7 +432,7 @@ var recipes = [{
     category: "Pizza Dough",
     time: "~3 days",
     serves: "Several balls (230g each)",
-    image: null,
+    image: "images/manitoba.jpeg",
     ingredients: [
       { amount: "1kg",       name: "Caputo Manitoba flour, plus extra for kneading" },
       { amount: "700g",      name: "water" },
@@ -502,7 +467,7 @@ var recipes = [{
     category: "Flatbread",
     time: "~3 hours",
     serves: "~8–9 naans",
-    image: "naan.jpeg",
+    image: "images/naan.jpeg",
     ingredients: [
       { amount: "¼ cup",   name: "plain yogurt (or cashew/almond yogurt)" },
       { amount: "1 tsp",   name: "sugar" },
@@ -537,6 +502,217 @@ var recipes = [{
       ]}
     ],
     notes: "Best eaten hot. If you don't have a gas flame, cook entirely on the skillet — press the edges with a spatula to make sure they cook through. The dough keeps in the fridge for 3–4 days. Using more yogurt in place of some or all of the water may give a better result — a richer dough with more flavour and a softer texture."
+  },
+  {
+    section: "doughs",
+    title: "3h Pizza Dough",
+    description: "A same-day pizza dough ready in about 3 hours. Minimal yeast, a couple of folds, and a relaxed proof.",
+    category: "Pizza Dough",
+    time: "~3 hours",
+    serves: "~3 balls (290g each)",
+    image: "images/3hours.jpeg",
+    ingredients: [
+      { amount: "500g", name: "double zero (00) flour" },
+      { amount: "375g", name: "water" },
+      { amount: "12g",  name: "salt" },
+      { amount: "2g",   name: "yeast" }
+    ],
+    phases: [
+      { heading: "Mix Ingredients", steps: [
+        "Add 2g of yeast to a mixing bowl.",
+        "Pour in 375g of water and stir until the yeast fully dissolves.",
+        "Add 500g of 00 flour and 12g of salt. Mix with a spoon, then use your hands to bring it together into a shaggy dough."
+      ]},
+      { heading: "Rest the Dough", steps: [
+        "Place the dough in a container. Let it rest at room temperature for 30 minutes."
+      ]},
+      { heading: "Stretch and Fold", steps: [
+        "After 30 minutes, stretch and fold the dough on all four sides, then shape it into a tighter ball. Let it rest for 1 hour at room temperature."
+      ]},
+      { heading: "Divide and Shape", steps: [
+        "Divide the dough into portions of 290g each. Slap each piece on the counter a few times, then shape into a smooth, tight dough ball."
+      ]},
+      { heading: "Final Proof", steps: [
+        "Let the dough balls rest at room temperature for 1.5 hours until roughly doubled in size. Now ready to stretch and top."
+      ]}
+    ],
+    notes: "Slap the dough balls on the counter a few times when forming them. Best to extend the total time to 4-4.5 hours and do some reballing for better structure."
+  },
+  {
+    section: "doughs",
+    title: "New York Style Pizza Dough",
+    description: "A poolish-based dough with olive oil for a crispy, well-browned crust. Cold-fermented for up to 48 hours — foldable, flavourful, and built to hold a proper New York slice.",
+    category: "Pizza Dough",
+    time: "1–2 days",
+    serves: "860g total dough",
+    image: "images/ny_style.jpeg",
+    ingredients: [
+      { amount: "1g",   name: "active dry yeast (poolish)" },
+      { amount: "150g", name: "water (poolish)" },
+      { amount: "150g", name: "bread flour (poolish)" },
+      { amount: "190g", name: "water (dough)" },
+      { amount: "343g", name: "00 flour (dough)" },
+      { amount: "13g",  name: "salt" },
+      { amount: "20g",  name: "olive oil" }
+    ],
+    phases: [
+      { heading: "Make the Poolish", steps: [
+        "Combine 150g water, 150g bread flour, and 1g active dry yeast. Mix until smooth.",
+        "Ferment at room temperature for 7–12 hours."
+      ]},
+      { heading: "Mix the Dough", steps: [
+        "Add the poolish and all remaining ingredients (water, 00 flour, salt, olive oil) to a mixer.",
+        "Mix until smooth. The dough should reach 75–78°F / 24–26°C."
+      ]},
+      { heading: "Bulk Ferment", steps: [
+        "Transfer to a sealed container and bulk ferment at room temperature for 1 hour."
+      ]},
+      { heading: "Divide and Shape", steps: [
+        "Divide the dough and tightly shape into balls of your desired size.",
+        "Proof the dough balls at room temperature for 1 hour."
+      ]},
+      { heading: "Cold Ferment", steps: [
+        "Place in the fridge for 24–48 hours. OR allow the dough to double in size at room temperature for another 30–60 minutes and bake the same day.",
+        "If refrigerating, remove the dough at least 30–60 minutes before baking to take the chill off."
+      ]}
+    ],
+    notes: "Oil is key for NY-style — it conducts heat and promotes browning for a crispier crust. Use whole milk low-moisture mozzarella, grated by hand. For the sauce, use a crushed tomato that isn't too watery so the cheese and sauce come together rather than turning soupy."
+  },
+  {
+    section: "beyond",
+    title: "Spinach & Feta Gözleme",
+    description: "Turkey's answer to a toastie. A yogurt-based dough rolled paper-thin, filled with spinach and feta, folded into a parcel and cooked in the pizza oven — done in under 5 minutes, beautifully blistered.",
+    category: "Flatbread",
+    time: "~1 hour 15 mins",
+    serves: "~4 gözleme",
+    image: "images/gozleme.jpeg",
+    ingredients: [
+      { amount: "300g",   name: "plain flour" },
+      { amount: "40g",    name: "olive oil" },
+      { amount: "50g",    name: "plain yogurt" },
+      { amount: "125ml",  name: "warm water" },
+      { amount: "1 tsp",  name: "salt" },
+      { amount: "40g per gözleme", name: "feta cheese" },
+      { amount: "40g per gözleme", name: "baby spinach, roughly chopped" },
+      { amount: "to taste", name: "black pepper" },
+      { amount: "to finish", name: "olive oil, for brushing" }
+    ],
+    phases: [
+      { heading: "Make the Dough", steps: [
+        "Mix together the warm water, olive oil, and yogurt in a jug.",
+        "Place the flour and salt in a large bowl and make a well in the centre. Gradually pour in the wet mixture, mixing as you go, until a dough forms.",
+        "Transfer to a work surface and knead for about 4 minutes until super smooth.",
+        "Place back in the bowl, cover with clingfilm, and rest for 30 minutes to an hour."
+      ]},
+      { heading: "Fill and Fold", steps: [
+        "Divide the dough into 70g portions. On a well-floured surface, roll each one out as thin as possible into a rough rectangle.",
+        "In a bowl, combine the chopped spinach and crumbled feta. Season with black pepper.",
+        "Place the filling in the centre of the dough and fold in the four sides to seal it into a neat rectangular parcel.",
+        "Lightly roll over the parcel with a rolling pin to seal it shut and even out the thickness."
+      ]},
+      { heading: "Cook in the Pizza Oven", steps: [
+        "Place the gözleme on a lightly floured peel horizontally. Launch into the front third of the oven — too far back and it will burn before it's cooked through.",
+        "Cook for about 1 minute, then rotate 180° and cook for another minute.",
+        "Flip the parcel over, then relaunch vertically (shorter sides facing the flame and the oven mouth). Cook for 30 seconds, rotate 180°, and cook a final 30 seconds.",
+        "Brush generously with olive oil, slice in half, and serve immediately."
+      ]}
+    ],
+    notes: "The dough must be kneaded until completely smooth — this is what makes it rollable and pliable. Keep the gözleme in the front third of the oven to avoid burning. The olive oil brush at the end is not optional."
+  },
+  {
+    section: "toppings",
+    title: "Olives",
+    image: "images/olives.jpeg",
+    ingredients: [
+      { amount: "handful",  name: "Castelvetrano olives, pitted and lightly crushed" },
+      { amount: "handful",  name: "Kalamata olives, pitted and halved" },
+      { amount: "1 tbsp",   name: "capers, rinsed" },
+      { amount: "to taste", name: "dried oregano" },
+      { amount: "to taste", name: "chilli flakes" },
+      { amount: "to taste", name: "extra-virgin olive oil" },
+      { amount: "optional", name: "fior di latte or grated Pecorino" },
+      { amount: "optional", name: "anchovies, for a puttanesca twist" }
+    ],
+    phases: null,
+    notes: null
+  },
+  {
+    section: "toppings",
+    title: "Pumpkin, Ricotta & Pomegranate",
+    image: "images/pumpkin.jpeg",
+    ingredients: [
+      { amount: "200g",     name: "pumpkin or butternut squash, thinly sliced or roasted" },
+      { amount: "1 tbsp",   name: "extra-virgin olive oil" },
+      { amount: "pinch",    name: "chilli flakes" },
+      { amount: "pinch",    name: "ground cinnamon or nutmeg" },
+      { amount: "3–4 tbsp", name: "ricotta, dolloped" },
+      { amount: "handful",  name: "pomegranate seeds" },
+      { amount: "handful",  name: "fresh sage leaves" },
+      { amount: "to taste", name: "flaky sea salt and black pepper" },
+      { amount: "optional", name: "drizzle of honey or balsamic glaze, to finish" }
+    ],
+    phases: null,
+    notes: null
+  },
+  {
+    section: "toppings",
+    title: "Burrata with Rocket",
+    image: "images/burrata.jpeg",
+    ingredients: [
+      { amount: "1 ball",   name: "burrata" },
+      { amount: "handful",  name: "rocket (arugula)" },
+      { amount: "to taste", name: "extra-virgin olive oil" },
+      { amount: "to taste", name: "flaky sea salt and black pepper" },
+      { amount: "optional", name: "lemon zest or a few drops of lemon juice" }
+    ],
+    phases: null,
+    notes: null
+  },
+  {
+    section: "toppings",
+    title: "Mushroom",
+    image: "images/mushrooms.jpeg",
+    ingredients: [
+      { amount: "150g",     name: "mushrooms (chestnut or mixed), thinly sliced" },
+      { amount: "2 cloves", name: "garlic, thinly sliced" },
+      { amount: "2 tbsp",   name: "extra-virgin olive oil" },
+      { amount: "to taste", name: "salt and black pepper" },
+      { amount: "optional", name: "fresh thyme or rosemary" },
+      { amount: "optional", name: "grated Parmigiano or Pecorino, to finish" }
+    ],
+    phases: null,
+    notes: null
+  },
+  {
+    section: "toppings",
+    title: "Aubergine",
+    image: "images/aubergine.jpeg",
+    ingredients: [
+      { amount: "1 medium",  name: "aubergine, thinly sliced or diced" },
+      { amount: "2 tbsp",    name: "extra-virgin olive oil" },
+      { amount: "1 clove",   name: "garlic, minced" },
+      { amount: "to taste",  name: "salt and black pepper" },
+      { amount: "optional",  name: "tomato passata as a base" },
+      { amount: "optional",  name: "fior di latte or smoked scamorza" },
+      { amount: "optional",  name: "fresh basil, to finish" }
+    ],
+    phases: null,
+    notes: null
+  },
+  {
+    section: "toppings",
+    title: "Marinara",
+    image: "images/marinara.jpeg",
+    ingredients: [
+      { amount: "4 tbsp",   name: "tomato passata or crushed San Marzano tomatoes" },
+      { amount: "2 cloves", name: "garlic, thinly sliced" },
+      { amount: "1 tbsp",   name: "extra-virgin olive oil" },
+      { amount: "to taste", name: "dried oregano" },
+      { amount: "to taste", name: "flaky sea salt" },
+      { amount: "optional", name: "fresh basil" }
+    ],
+    phases: null,
+    notes: null
   }
 ];
 
@@ -560,9 +736,13 @@ function openModal(i) {
     modalImg.style.display = 'none';
   }
   document.getElementById('modalTitle').textContent = r.title;
-  document.getElementById('modalDesc').textContent = r.description;
-  document.getElementById('modalMeta').innerHTML =
-    '<span>' + r.category + '</span><span>' + r.time + '</span><span>' + r.serves + '</span>';
+  document.getElementById('modalDesc').textContent = r.description || '';
+  document.getElementById('modalDesc').style.display = r.description ? '' : 'none';
+  var metaHTML = '';
+  if (r.category) metaHTML += '<span>' + r.category + '</span>';
+  if (r.time)     metaHTML += '<span>' + r.time + '</span>';
+  if (r.serves)   metaHTML += '<span>' + r.serves + '</span>';
+  document.getElementById('modalMeta').innerHTML = metaHTML;
 
   var ingHTML = '';
   for (var j = 0; j < r.ingredients.length; j++) {
@@ -572,15 +752,19 @@ function openModal(i) {
   document.getElementById('modalIngredients').innerHTML = ingHTML;
 
   var phasesHTML = '';
-  for (var p = 0; p < r.phases.length; p++) {
-    var ph = r.phases[p];
-    phasesHTML += '<div class="phase"><p class="phase-heading">' + ph.heading + '</p>';
-    for (var s = 0; s < ph.steps.length; s++) {
-      phasesHTML += '<div class="step"><span class="step-num">' + (s + 1) +
-        '</span><p class="step-text">' + ph.steps[s] + '</p></div>';
+  if (r.phases && r.phases.length) {
+    for (var p = 0; p < r.phases.length; p++) {
+      var ph = r.phases[p];
+      phasesHTML += '<div class="phase"><p class="phase-heading">' + ph.heading + '</p>';
+      for (var s = 0; s < ph.steps.length; s++) {
+        phasesHTML += '<div class="step"><span class="step-num">' + (s + 1) +
+          '</span><p class="step-text">' + ph.steps[s] + '</p></div>';
+      }
+      phasesHTML += '</div>';
     }
-    phasesHTML += '</div>';
   }
+  var methodSection = document.getElementById('modalSteps').parentElement;
+  methodSection.style.display = phasesHTML ? '' : 'none';
   document.getElementById('modalSteps').innerHTML = phasesHTML;
 
   document.getElementById('modalNotes').innerHTML = r.notes
@@ -604,12 +788,16 @@ for (var k = 0; k < recipes.length; k++) {
     card.className = 'card';
     card.tabIndex = 0;
     card.setAttribute('role', 'button');
+    var metaParts = [];
+    if (r.category) metaParts.push('<span>' + r.category + '</span>');
+    if (r.time)     metaParts.push('<span>' + r.time + '</span>');
+    if (r.serves)   metaParts.push('<span>' + r.serves + '</span>');
     card.innerHTML =
       (r.image ? '<div class="card-img-wrap"><img src="' + r.image + '" alt="' + r.title + '" loading="lazy"></div>' : '') +
       '<div class="card-body">' +
-        '<div class="card-meta"><span>' + r.category + '</span><span>' + r.time + '</span><span>' + r.serves + '</span></div>' +
+        '<div class="card-meta">' + metaParts.join('') + '</div>' +
         '<h2 class="card-title">' + r.title + '</h2>' +
-        '<p class="card-desc">' + r.description + '</p>' +
+        (r.description ? '<p class="card-desc">' + r.description + '</p>' : '') +
       '</div>';
     card.addEventListener('click', function() { openModal(idx); });
     card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
