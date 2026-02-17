@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Recipe Box</title>
+  <title>The Proofing Box</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,6 +15,7 @@
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
 
     header { padding: 3rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--light-stone); animation: fadeDown 0.7s ease both; }
+    .site-logo { display: block; width: 250px; height: auto; margin: 0 auto 1.5rem; mix-blend-mode: multiply; }
     .site-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 300; letter-spacing: 0.04em; }
     .site-name span { color: var(--warm); font-style: italic; }
     .site-tagline { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
@@ -93,8 +94,9 @@
 <body>
 
 <header>
-  <h1 class="site-name">The Recipe <span>Box</span></h1>
-  <p class="site-tagline">Simple cooking, carefully made</p>
+  <img src="logo.png" alt="The Proofing Box" class="site-logo" />
+  <h1 class="site-name">The Proofing <span>Box</span></h1>
+  <p class="site-tagline">From dough to crust</p>
 </header>
 
 <main>
@@ -123,7 +125,7 @@
   </div>
 </main>
 
-<footer>The Recipe Box &nbsp;&middot;&nbsp; Made with care</footer>
+<footer>The Proofing Box &nbsp;&middot;&nbsp; Made with care</footer>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true">
   <div class="modal" id="modal">
