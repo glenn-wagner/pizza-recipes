@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Recipe Box</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf8f4; --ink: #1a1816; --stone: #8c8680;
+      --warm: #c8a96e; --light-stone: #e8e4de; --card-bg: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+
+    header { padding: 3rem 2rem 2rem; text-align: center; border-bottom: 1px solid var(--light-stone); animation: fadeDown 0.7s ease both; }
+    .site-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 300; letter-spacing: 0.04em; }
+    .site-name span { color: var(--warm); font-style: italic; }
+    .site-tagline { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 2rem; }
+
+    .card { background: var(--card-bg); border: 1px solid var(--light-stone); cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; animation: fadeUp 0.6s ease both; }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.12s; }
+    .card:nth-child(3) { animation-delay: 0.19s; }
+    .card:nth-child(4) { animation-delay: 0.26s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+    .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--light-stone); }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+    .card:hover .card-img-wrap img { transform: scale(1.04); }
+    .card-body { padding: 1.25rem 1.5rem 1.5rem; }
+    .card-meta { display: flex; gap: 1rem; margin-bottom: 0.6rem; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone); }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; line-height: 1.25; margin-bottom: 0.5rem; }
+    .card-desc { font-size: 0.85rem; color: var(--stone); line-height: 1.6; font-weight: 300; }
+
+    .overlay { position: fixed; inset: 0; background: rgba(26,24,22,0.55); display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow-y: auto; }
+    .overlay.active { opacity: 1; pointer-events: all; }
+    .modal { background: var(--cream); width: 100%; max-width: 720px; position: relative; transform: translateY(20px); transition: transform 0.35s cubic-bezier(.22,.68,0,1.2); }
+    .overlay.active .modal { transform: translateY(0); }
+    .modal-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; background: var(--light-stone); }
+    .modal-body { padding: 2rem 2.5rem 3rem; }
+    .modal-meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.1; margin-bottom: 0.75rem; }
+    .modal-desc { font-size: 0.9rem; color: var(--stone); line-height: 1.7; font-weight: 300; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--light-stone); }
+
+    .section-label { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 0.85rem; }
+    .ingredients { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--light-stone); }
+    .ingredient-item { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.45rem 0; font-size: 0.875rem; line-height: 1.4; }
+    .ingredient-item + .ingredient-item { border-top: 1px solid var(--light-stone); }
+    .ingredient-amount { font-weight: 500; min-width: 80px; color: var(--stone); font-size: 0.8rem; }
+
+    .phase { margin-bottom: 1.75rem; }
+    .phase-heading { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; font-style: italic; color: var(--ink); margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--light-stone); }
+    .step { display: grid; grid-template-columns: 2rem 1fr; gap: 0 1rem; margin-bottom: 1rem; align-items: start; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: var(--warm); line-height: 1.2; }
+    .step-text { font-size: 0.9rem; line-height: 1.75; font-weight: 300; padding-top: 0.05rem; }
+
+    .notes-block { margin-top: 2rem; padding: 1.25rem 1.5rem; background: #f5f1ea; border-left: 3px solid var(--warm); }
+    .notes-block .section-label { margin-bottom: 0.5rem; }
+    .notes-text { font-size: 0.875rem; line-height: 1.7; font-weight: 300; font-style: italic; }
+
+    .close-btn { position: absolute; top: 1rem; right: 1rem; width: 2.25rem; height: 2.25rem; background: rgba(250,248,244,0.9); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .close-btn:hover { background: var(--cream); }
+    .close-btn svg { width: 14px; height: 14px; stroke: var(--ink); }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--stone); letter-spacing: 0.12em; border-top: 1px solid var(--light-stone); }
+
+    .section { margin-bottom: 4rem; }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-stone); }
+    .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; letter-spacing: 0.03em; }
+    .section-header h2 em { color: var(--warm); font-style: italic; }
+    .section-header .section-count { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); }
+
+    .card-empty { background: transparent; border: 1px dashed var(--light-stone); display: flex; align-items: center; justify-content: center; min-height: 200px; cursor: default; }
+    .card-empty:hover { transform: none; box-shadow: none; }
+    .card-empty-text { text-align: center; }
+    .card-empty-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--light-stone); }
+    .card-empty-text span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-stone); display: block; margin-top: 0.4rem; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp   { from { opacity: 0; transform: translateY(18px);  } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 520px) {
+      .modal-body { padding: 1.5rem 1.25rem 2rem; }
+      .modal-meta { flex-wrap: wrap; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 class="site-name">The Recipe <span>Box</span></h1>
+  <p class="site-tagline">Simple cooking, carefully made</p>
+</header>
+
+<main>
+  <div class="section">
+    <div class="section-header">
+      <h2>Doughs</h2>
+      <span class="section-count" id="doughs-count"></span>
+    </div>
+    <div class="grid" id="grid-doughs"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2><em>Toppings</em></h2>
+      <span class="section-count" id="toppings-count"></span>
+    </div>
+    <div class="grid" id="grid-toppings"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>Beyond <em>Pizza</em></h2>
+      <span class="section-count" id="grid-beyond-count"></span>
+    </div>
+    <div class="grid" id="grid-beyond"></div>
+  </div>
+</main>
+
+<footer>The Recipe Box &nbsp;&middot;&nbsp; Made with care</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <button class="close-btn" id="closeBtn" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <img class="modal-img" id="modalImg" src="" alt="" />
+    <div class="modal-body">
+      <div class="modal-meta" id="modalMeta"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="ingredients">
+        <p class="section-label">Ingredients</p>
+        <div id="modalIngredients"></div>
+      </div>
+      <div>
+        <p class="section-label">Method</p>
+        <div id="modalSteps"></div>
+      </div>
+      <div id="modalNotes"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var recipes = [
+  {
+    section: "doughs",
+    title: "Sisofo 3h Pizza Dough",
+    description: "A same-day pizza dough ready in about 3 hours. Minimal yeast, a couple of folds, and a relaxed proof.",
+    category: "Pizza Dough",
+    time: "~3 hours",
+    serves: "~3 balls (290g each)",
+    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
+    ingredients: [
+      { amount: "500g", name: "double zero (00) flour" },
+      { amount: "375g", name: "water" },
+      { amount: "12g",  name: "salt" },
+      { amount: "2g",   name: "yeast" }
+    ],
+    phases: [
+      { heading: "Mix Ingredients", steps: [
+        "Add 2g of yeast to a mixing bowl.",
+        "Pour in 375g of water and stir until the yeast fully dissolves.",
+        "Add 500g of 00 flour and 12g of salt. Mix with a spoon, then use your hands to bring it together into a shaggy dough."
+      ]},
+      { heading: "Rest the Dough", steps: [
+        "Place the dough in a container. Let it rest at room temperature for 30 minutes."
+      ]},
+      { heading: "Stretch and Fold", steps: [
+        "After 30 minutes, stretch and fold the dough on all four sides, then shape it into a tighter ball. Let it rest for 1 hour at room temperature."
+      ]},
+      { heading: "Divide and Shape", steps: [
+        "Divide the dough into portions of 290g each. Slap each piece on the counter a few times, then shape into a smooth, tight dough ball."
+      ]},
+      { heading: "Final Proof", steps: [
+        "Let the dough balls rest at room temperature for 1.5 hours until roughly doubled in size. Now ready to stretch and top."
+      ]}
+    ],
+    notes: "Slap the dough balls on the counter a few times when forming them. Best to extend the total time to 4-4.5 hours and do some reballing for better structure."
+  },
+  {
+    section: "doughs",
+    title: "Iacopelli Double Fermentation 3-Day Dough",
+    description: "A poolish-based dough fermented over three days for deep flavour and an open, airy crumb.",
+    category: "Pizza Dough",
+    time: "3 days",
+    serves: "Several balls",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
+    ingredients: [
+      { amount: "150ml", name: "water (for poolish)" },
+      { amount: "150g",  name: "flour (for poolish)" },
+      { amount: "1g",    name: "yeast, approx 1/3 tsp (for poolish)" },
+      { amount: "3g",    name: "honey (for poolish)" },
+      { amount: "200ml", name: "water (for dough)" },
+      { amount: "350g",  name: "flour (for dough)" },
+      { amount: "15g",   name: "salt" },
+      { amount: "5g",    name: "olive oil" }
+    ],
+    phases: [
+      { heading: "Day 1 Evening - Make the Poolish", steps: [
+        "Mix 150ml water, 150g flour, 1g yeast, and 3g honey together in a bowl until combined.",
+        "Leave at room temperature for 1 hour to activate the yeast, then cover and refrigerate for 16-24 hours."
+      ]},
+      { heading: "Day 2 Evening - Make the Pizza Dough", steps: [
+        "Remove the poolish from the fridge and let it sit out for 30 minutes.",
+        "Add 200ml of water, 350g of flour, 15g of salt, and 5g of olive oil to the poolish. Mix everything together.",
+        "Knead for 8-10 minutes until smooth and elastic.",
+        "Place in a covered bowl and refrigerate for another 16-24 hours."
+      ]},
+      { heading: "Day 3 Afternoon - Ball and Proof", steps: [
+        "Take the dough out of the fridge and leave it for 1-2 hours to come up to temperature.",
+        "Divide into dough balls. Let them rest at room temperature for 2-4 hours (typically 2 hours at 25C). Reball twice, once every hour.",
+        "When the balls are puffy and relaxed, heat your oven to its maximum temperature and make pizza."
+      ]}
+    ],
+    notes: null
+  },
+  {
+    section: "doughs",
+    title: "Sisifo Leopard Pizza Dough",
+    description: "A biga-and-poolish combo with a multi-day cold ferment designed for maximum flavour and leopard spotting in the oven.",
+    category: "Pizza Dough",
+    time: "4 days",
+    serves: "Several balls (270g each)",
+    image: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=800&q=80",
+    ingredients: [
+      { amount: "292g",    name: "flour (for biga)" },
+      { amount: "146g",    name: "water (for biga)" },
+      { amount: "0.5g",    name: "yeast (for biga)" },
+      { amount: "200g",    name: "flour (for poolish)" },
+      { amount: "200g",    name: "water (for poolish)" },
+      { amount: "0.4g",    name: "yeast (for poolish)" },
+      { amount: "13.78g",  name: "salt" }
+    ],
+    phases: [
+      { heading: "Day 1 Morning - Make Poolish and Biga", steps: [
+        "Poolish: Combine 200g water, 200g flour, and 0.4g yeast. Mix until smooth, cover, and set aside.",
+        "Biga: Combine 146g water, 292g flour, and 0.5g yeast. Mix until it just comes together (it will be stiff), cover, and set aside."
+      ]},
+      { heading: "Day 1 Evening - Refrigerate", steps: [
+        "After 7 hours at room temperature, move both the poolish and biga into the fridge. Leave for 12-24 hours."
+      ]},
+      { heading: "Day 2 Evening - Mix the Final Dough", steps: [
+        "Add the cold biga and poolish (straight from the fridge, around 50F / 10C) to a mixer.",
+        "Add 13.78g of salt. Mix until the dough reaches 70F / 21C.",
+        "Tightly shape into a ball and bulk ferment in the fridge overnight (24 hours)."
+      ]},
+      { heading: "Day 3 Evening - Ball", steps: [
+        "Divide the dough into 270g balls. Place in the fridge for another 24 hours."
+      ]},
+      { heading: "Day 4 Evening - Final Proof and Bake", steps: [
+        "Take the dough balls out of the fridge 2 hours before baking and let them come to room temperature.",
+        "Shape the pizzas and bake at maximum oven temperature."
+      ]}
+    ],
+    notes: null
+  },
+  {
+    section: "doughs",
+    title: "Oliver and Mat Manitoba Pizza",
+    description: "A 63-hour cold-fermented dough made with high-protein Manitoba flour. Stretches beautifully to a 10-inch base.",
+    category: "Pizza Dough",
+    time: "~3 days",
+    serves: "Several balls (230g each)",
+    image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=800&q=80",
+    ingredients: [
+      { amount: "1kg",       name: "Caputo Manitoba flour, plus extra for kneading" },
+      { amount: "700g",      name: "water" },
+      { amount: "26g",       name: "salt" },
+      { amount: "2g",        name: "yeast" },
+      { amount: "as needed", name: "semolina flour, for shaping and stretching" }
+    ],
+    phases: [
+      { heading: "Evening Day 1 - Mix and Knead", steps: [
+        "Add 700g of water to a mixing bowl. Add 2g of yeast and stir until every grain has dissolved.",
+        "Gradually add the Manitoba flour to the water, mixing with a fork to remove lumps as you go.",
+        "When the dough becomes too thick for a fork, tip it onto a floured surface. Scrape any dough left in the bowl and incorporate it.",
+        "Knead for 10-15 minutes until all the flour is incorporated and the dough is smooth and elastic.",
+        "Shape into a tight ball, cover with the upturned mixing bowl, and rest for 1 hour.",
+        "After the hour, uncover and work in 26g of salt until fully absorbed.",
+        "Return the dough to the bowl, cover, and rest for another 1 hour.",
+        "Place in the fridge for 63 hours."
+      ]},
+      { heading: "Lunchtime Day 3 - Ball and Final Proof", steps: [
+        "Remove the dough from the fridge and allow 2 hours for it to return to room temperature.",
+        "Divide into 230g dough balls and place in a dough tray or individual containers.",
+        "Let the balls rest for 4 hours.",
+        "When ready, tip a dough ball onto a bed of semolina. Use your fingertips to press from the centre outward, then use the steering-wheel method to gently stretch to a 10-inch base. Top and bake."
+      ]}
+    ],
+    notes: null
+  }
+];
+
+var grids = {
+  doughs:   document.getElementById('grid-doughs'),
+  toppings: document.getElementById('grid-toppings'),
+  beyond:   document.getElementById('grid-beyond')
+};
+var overlay = document.getElementById('overlay');
+var closeBtn = document.getElementById('closeBtn');
+
+function openModal(i) {
+  var r = recipes[i];
+  document.getElementById('modalImg').src = r.image;
+  document.getElementById('modalImg').alt = r.title;
+  document.getElementById('modalTitle').textContent = r.title;
+  document.getElementById('modalDesc').textContent = r.description;
+  document.getElementById('modalMeta').innerHTML =
+    '<span>' + r.category + '</span><span>' + r.time + '</span><span>' + r.serves + '</span>';
+
+  var ingHTML = '';
+  for (var j = 0; j < r.ingredients.length; j++) {
+    ingHTML += '<div class="ingredient-item"><span class="ingredient-amount">' +
+      r.ingredients[j].amount + '</span><span>' + r.ingredients[j].name + '</span></div>';
+  }
+  document.getElementById('modalIngredients').innerHTML = ingHTML;
+
+  var phasesHTML = '';
+  for (var p = 0; p < r.phases.length; p++) {
+    var ph = r.phases[p];
+    phasesHTML += '<div class="phase"><p class="phase-heading">' + ph.heading + '</p>';
+    for (var s = 0; s < ph.steps.length; s++) {
+      phasesHTML += '<div class="step"><span class="step-num">' + (s + 1) +
+        '</span><p class="step-text">' + ph.steps[s] + '</p></div>';
+    }
+    phasesHTML += '</div>';
+  }
+  document.getElementById('modalSteps').innerHTML = phasesHTML;
+
+  document.getElementById('modalNotes').innerHTML = r.notes
+    ? '<div class="notes-block"><p class="section-label">Notes</p><p class="notes-text">' + r.notes + '</p></div>'
+    : '';
+
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+}
+
+function closeModal() {
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+for (var k = 0; k < recipes.length; k++) {
+  (function(idx) {
+    var r = recipes[idx];
+    var card = document.createElement('article');
+    card.className = 'card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.innerHTML =
+      '<div class="card-img-wrap"><img src="' + r.image + '" alt="' + r.title + '" loading="lazy"></div>' +
+      '<div class="card-body">' +
+        '<div class="card-meta"><span>' + r.category + '</span><span>' + r.time + '</span><span>' + r.serves + '</span></div>' +
+        '<h2 class="card-title">' + r.title + '</h2>' +
+        '<p class="card-desc">' + r.description + '</p>' +
+      '</div>';
+    card.addEventListener('click', function() { openModal(idx); });
+    card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') openModal(idx); });
+    var targetGrid = grids[r.section] || grids.doughs;
+    targetGrid.appendChild(card);
+  })(k);
+}
+
+// Count labels
+var sectionCounts = { doughs: 0, toppings: 0, beyond: 0 };
+for (var m = 0; m < recipes.length; m++) {
+  if (sectionCounts[recipes[m].section] !== undefined) sectionCounts[recipes[m].section]++;
+}
+document.getElementById('doughs-count').textContent =
+  sectionCounts.doughs + ' recipe' + (sectionCounts.doughs !== 1 ? 's' : '');
+
+// Empty state placeholders for sections with no recipes
+function addEmptyCard(grid, label) {
+  var empty = document.createElement('article');
+  empty.className = 'card card-empty';
+  empty.innerHTML = '<div class="card-empty-text"><p>' + label + '</p><span>Coming soon</span></div>';
+  grid.appendChild(empty);
+}
+
+if (sectionCounts.toppings === 0) {
+  document.getElementById('toppings-count').textContent = 'Coming soon';
+  addEmptyCard(grids.toppings, 'Recipes on their way');
+} else {
+  document.getElementById('toppings-count').textContent =
+    sectionCounts.toppings + ' recipe' + (sectionCounts.toppings !== 1 ? 's' : '');
+}
+
+if (sectionCounts.beyond === 0) {
+  document.getElementById('grid-beyond-count').textContent = 'Coming soon';
+  addEmptyCard(grids.beyond, 'Recipes on their way');
+} else {
+  document.getElementById('grid-beyond-count').textContent =
+    sectionCounts.beyond + ' recipe' + (sectionCounts.beyond !== 1 ? 's' : '');
+}
+
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
